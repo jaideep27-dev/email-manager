@@ -33,7 +33,7 @@ def email_manager(chain, gmail_service, next_page_token):
                 result["confidence_score"],
                 result["category"],
             )
-            if result["classification"] == "remove" and result["confidence_score"] > 0.8:
+            if result["classification"].lower() == "remove" and result["confidence_score"] > 0.8:
                 if gmail_service.trash_message(email["Id"]):
                     logging.info("Email moved to trash successfully!")
                 else:

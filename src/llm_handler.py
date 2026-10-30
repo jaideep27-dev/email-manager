@@ -20,7 +20,7 @@ SYSTEM_PROMPT_PATH = BASE_DIR / "prompts" / "system.txt"
 def get_classification_chain():
     # Initialize local LLM
     llm = ChatOllama(
-        model="deepseek-r1:8b", temperature=0, reasoning=False, format="json"
+        model="gemma4:e2b", temperature=0, reasoning=False, format="json"
     )
 
     logging.info("LLM %s initialized", llm.model)

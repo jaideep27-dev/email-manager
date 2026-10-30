@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
 TOKEN_PATH = DATA_DIR / "token.json"
-CREDENTIALS_PATH = DATA_DIR / "credentials.json"
+CREDENTIALS_PATH = DATA_DIR / "client_secret.json"
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
