@@ -1,6 +1,6 @@
 # AI Email Triage & Inbox Cleaner
 
-An intelligent, privacy-preserving email triage automation tool powered by local LLMs (DeepSeek via Ollama), LangChain, and the Google Gmail API. The system fetches unprocessed inbox messages, extracts and sanitizes multipart contents, classifies each email using structured Pydantic schemas, and safely trashes low-value noise (promotions, social updates, and marketing digests) with high-confidence thresholds while persisting audit history in SQLite.
+An intelligent, privacy-preserving email triage automation tool powered by local LLMs (Gemma via Ollama), LangChain, and the Google Gmail API. The system fetches unprocessed inbox messages, extracts and sanitizes multipart contents, classifies each email using structured Pydantic schemas, and safely trashes low-value noise (promotions, social updates, and marketing digests) with high-confidence thresholds while persisting audit history in SQLite.
 
 ---
 
@@ -35,7 +35,7 @@ An intelligent, privacy-preserving email triage automation tool powered by local
                                      v
 +---------------------+   +--------------------+
 | Local LLM (Ollama)  |<--| Structured Output  |
-| (DeepSeek-R1:8B)    |-->| Pydantic Parser   |
+| (Gemma-R1:8B)    |-->| Pydantic Parser   |
 +---------------------+   +----------+---------+
                                      | (Classification, Confidence, Category)
                                      v
@@ -62,7 +62,7 @@ An intelligent, privacy-preserving email triage automation tool powered by local
    - **Sandwich Head-Tail Truncation**: Safeguards against context-window explosion on long marketing or legal emails by preserving the top 80% (essential message context) and trailing 20% (sign-offs, unsubscribes, and metadata links).
 
 3. **Inference & Structured Parsing (`src/llm_handler.py`, `src/models.py`, `prompts/system.txt`)**:
-   - Powered by a local Ollama deployment running `deepseek-r1:8b` (zero-temperature, zero data leakage).
+   - Powered by a local Ollama deployment running `Gemma-r1:8b` (zero-temperature, zero data leakage).
    - Enforces deterministic output schema via LangChain's `JsonOutputParser` paired with a Pydantic model (`classification`, `confidence_score`, `reasoning`, `category`).
    - Rubric explicitly enforces defensive retention ("When ambiguous, default to keep").
 
@@ -110,9 +110,9 @@ email_manager/
 
 1. **Python 3.10+**
 2. **Ollama**: Installed and running locally.
-   - Pull the DeepSeek model:
+   - Pull the Gemma model:
      ```bash
-     ollama pull deepseek-r1:8b
+     ollama pull Gemma-r1:8b
      ```
 3. **Google Cloud Project**:
    - Enable the **Gmail API** in Google Cloud Console.
