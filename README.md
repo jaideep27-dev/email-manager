@@ -35,7 +35,7 @@ An intelligent, privacy-preserving email triage automation tool powered by local
                                      v
 +---------------------+   +--------------------+
 | Local LLM (Ollama)  |<--| Structured Output  |
-| (Gemma-R1:8B)    |-->| Pydantic Parser   |
+| (Gemma)    |-->| Pydantic Parser   |
 +---------------------+   +----------+---------+
                                      | (Classification, Confidence, Category)
                                      v
@@ -62,7 +62,7 @@ An intelligent, privacy-preserving email triage automation tool powered by local
    - **Sandwich Head-Tail Truncation**: Safeguards against context-window explosion on long marketing or legal emails by preserving the top 80% (essential message context) and trailing 20% (sign-offs, unsubscribes, and metadata links).
 
 3. **Inference & Structured Parsing (`src/llm_handler.py`, `src/models.py`, `prompts/system.txt`)**:
-   - Powered by a local Ollama deployment running `Gemma-r1:8b` (zero-temperature, zero data leakage).
+   - Powered by a local Ollama deployment running `Gemma` (zero-temperature, zero data leakage).
    - Enforces deterministic output schema via LangChain's `JsonOutputParser` paired with a Pydantic model (`classification`, `confidence_score`, `reasoning`, `category`).
    - Rubric explicitly enforces defensive retention ("When ambiguous, default to keep").
 
@@ -112,7 +112,7 @@ email_manager/
 2. **Ollama**: Installed and running locally.
    - Pull the Gemma model:
      ```bash
-     ollama pull Gemma-r1:8b
+     ollama pull gemma4:e2b
      ```
 3. **Google Cloud Project**:
    - Enable the **Gmail API** in Google Cloud Console.
